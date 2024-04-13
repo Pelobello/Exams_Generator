@@ -23,7 +23,7 @@ public class Main extends javax.swing.JFrame {
         initComponents();
         
         GlassPanePopup.install(this);
-        mainForm = new MainForm();
+        mainForm = new MainForm(this);
         addTitle = new AddTitle(mainForm);
         pd = new PopupData();
         mainPanel.setLayout(new BorderLayout());
@@ -33,7 +33,33 @@ public class Main extends javax.swing.JFrame {
     
         
     }
+ public void test(){
 
+        try {
+           
+            DatabaseConnection connection = new DatabaseConnection();
+            Connection con = connection.getCConnection();
+            
+          String sql = "SELECT * FROM title";
+          PreparedStatement  p = con.prepareStatement(sql);
+         mainForm.paneladdItem.removeAll();
+         mainForm.repaint();
+         mainForm.revalidate();
+          ResultSet  rs = p.executeQuery();
+            while (rs.next()) {
+                
+              ModelData item = new ModelData(rs.getString("Title"));
+                mainForm.addItem(item);
+                
+
+            }
+            
+      
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+    }
   
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
@@ -41,21 +67,35 @@ public class Main extends javax.swing.JFrame {
 
         jPanel1 = new javax.swing.JPanel();
         jPanel2 = new javax.swing.JPanel();
+        jButton1 = new javax.swing.JButton();
         mainPanel = new javax.swing.JPanel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
         jPanel1.setBackground(new java.awt.Color(255, 255, 255));
 
+        jButton1.setText("Refresh");
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
         jPanel2Layout.setHorizontalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 1149, Short.MAX_VALUE)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
+                .addContainerGap(1051, Short.MAX_VALUE)
+                .addComponent(jButton1)
+                .addGap(26, 26, 26))
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 66, Short.MAX_VALUE)
+            .addGroup(jPanel2Layout.createSequentialGroup()
+                .addGap(19, 19, 19)
+                .addComponent(jButton1)
+                .addContainerGap(24, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout mainPanelLayout = new javax.swing.GroupLayout(mainPanel);
@@ -99,28 +139,11 @@ public class Main extends javax.swing.JFrame {
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
-    public void test(){
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+      test();
+    }//GEN-LAST:event_jButton1ActionPerformed
 
-        try {
-           
-            DatabaseConnection connection = new DatabaseConnection();
-            Connection con = connection.getCConnection();
-            
-          String sql = "SELECT * FROM title";
-          PreparedStatement  p = con.prepareStatement(sql);
-         
-          ResultSet  rs = p.executeQuery();
-            while (rs.next()) {
-              ModelData item = new ModelData(rs.getString("Title"));
-                      mainForm.addItem(item);
-
-            }
-            
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-
-    }
+   
     public static void main(String args[]) {
         FlatLightLaf.setup();
         java.awt.EventQueue.invokeLater(new Runnable() {
@@ -131,6 +154,7 @@ public class Main extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton jButton1;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel mainPanel;

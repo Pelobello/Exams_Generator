@@ -63,7 +63,7 @@ public class ExamItem extends javax.swing.JPanel {
     }// </editor-fold>//GEN-END:initComponents
 
     private void titleDataActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_titleDataActionPerformed
-per.populateData(titleData.getText(), pd.resultTable);
+  per.populateData(titleData.getText(), pd.resultTable);
   GlassPanePopup.showPopup(pd);
     }//GEN-LAST:event_titleDataActionPerformed
 

@@ -6,20 +6,18 @@ package Exams.Forms;
 
 import Exams.Controller.AddTitle;
 import Exams.Item.ExamItem;
+import Exams.Main.Main;
 import Exams.Model.ModelData;
 import Exams.Model.ModelTitle;
 import Exams.PanelPopup.PopupData;
 
 
-/**
- *
- * @author USER
- */
 public class MainForm extends javax.swing.JPanel {
 
- 
-    public MainForm() {
+ private Main main;
+    public MainForm(Main main) {
         initComponents();
+        this.main = main;
     }
 
    public void addItem(ModelData data){
@@ -131,6 +129,7 @@ public class MainForm extends javax.swing.JPanel {
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
        AddTitle addTitle = new AddTitle(this);
        addTitle.addData(new ModelTitle(title.getText()));
+       main.test();
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
@@ -145,7 +144,7 @@ public class MainForm extends javax.swing.JPanel {
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JScrollPane jScrollPane1;
-    private Exams.Swing.PanelItem paneladdItem;
+    public Exams.Swing.PanelItem paneladdItem;
     private javax.swing.JTextField title;
     // End of variables declaration//GEN-END:variables
 }
